@@ -64,9 +64,9 @@ x queueADT<x>::dequeue(){      //O(1)
         front++;
         
 
-        if(front>=rear){
-            front=rear=-1;
-        }
+        // if(front>=rear){
+        //     front=rear=-1;
+        // }
         return X;
 
     }else{

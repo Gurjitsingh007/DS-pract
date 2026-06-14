@@ -43,7 +43,7 @@ T QueueADT<T>::dequeue(){
 
 template<class T >
 bool QueueADT<T>:: isempty(){
-    if(front==rear==-1)return true;
+    if(front==rear &&front==-1)return true;
     else return false;
 }
 

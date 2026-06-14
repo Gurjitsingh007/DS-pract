@@ -16,7 +16,6 @@ class Node{
 };
 class LL{
     Node* head;
-    Node* tail;
 
     public:
     LL(){
@@ -53,11 +52,12 @@ class LL{
     }
 
     void popFront(){
+        Node* temp=head;
         if(head==NULL){
             cout<<"linked list is empty\n";
             return;
         }
-        Node* temp=head;
+        
        head=head->next;
        temp->next=NULL;
        delete temp;
@@ -87,10 +87,70 @@ class LL{
     }
 
 
+    void aTm(int val,int i){ //add to middle
+        Node* newnode=new Node(val);
+        Node* temp=head;
+        int count=0;
+        if(i==0){          //add to head; (this) and
+            pushFront(val);
+            return;
+        }
+        if(head==NULL){ // add to head (this) both are solve by using pushFront.
+            head=newnode;
+            return;
+        }
+        while(temp->next!=NULL && count!=(i-1)){  //temp is at i-1 index
+            temp=temp->next;
+            count++;
+        }
+        if(temp->next==NULL){ //if user enter last index
+            temp->next=newnode;
+            return;
+
+        }
+        newnode->next=temp->next;
+        temp->next=newnode;
+
+}
+ void rFm(int j){  //remove from middle
+    Node* temp=head;
+    int count=0;
+    // if(head==NULL){//empty
+    //     cout<<"list is empty";
+    //     return -1;
+    // }
+    if(j==0||head==NULL){ //remove from head or empty
+       popFront();
+        return;
+    }
+    while((temp->next)->next!=NULL && count!=(j-1)){   // itrate at i-1
+        temp=temp->next;
+        count++;
+    }
+    if((temp->next)->next==NULL){ //tail
+        delete temp->next;
+        temp->next=NULL;
+        return;
+    }
+    Node *x=temp->next;
+    temp->next=(temp->next)->next;
+    x->next=NULL;
+    
+    delete x;
+
+
+
+ }
+
+
 
 
     void display(){
         Node* temp=head;
+        if(head==NULL){
+            cout<<"list is empty";
+            return;
+        }
         while(temp!=NULL){
             cout<<"["<<temp->data<<"]"<<"->";
             temp=temp->next;
@@ -103,13 +163,15 @@ class LL{
 
 int main(){
     LL q;
-    q.pushFront(1);
-    q.pushFront(2);
-    q.pushFront(3);
-    q.pushBack(4);
-    q.popFront();
-    q.popback();
-    q.popback();
+    // q.pushFront(1);
+    // q.pushFront(2);
+    // q.pushFront(3);
+    // q.pushBack(4);
+    // // q.popFront();
+    // // q.popback();
+    // // q.popback();
+    // q.aTm(5,2);
+    q.rFm(4);
     q.display();
    
 
